@@ -3,16 +3,16 @@
 ```bash
 QQ群:261097396
 ```
-<<<<<<< HEAD
 ```bash
  效果图1
 ```
-![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/music.png)
+![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/home.png)
+
 
 ```bash
  效果图2
 ```
-![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/home.png)
+![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/music.png)
 
 1. Clone this repo
 
