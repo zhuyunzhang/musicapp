@@ -3,6 +3,8 @@
 ```bash
 QQ群:261097396
 ```
+![Image](https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png)
+
 1. Clone this repo
 
 ```bash
