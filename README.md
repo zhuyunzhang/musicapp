@@ -4,15 +4,10 @@
 QQ群:261097396
 ```
 ```bash
- 效果图1
+ 效果图
 ```
-![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/home.png)
+![全图](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/mymusicapp.gif)
 
-
-```bash
- 效果图2
-```
-![Image](https://github.com/zhuyunzhang/musicapp/blob/master/app/images/music.png)
 
 1. Clone this repo
 
