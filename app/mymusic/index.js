@@ -58,6 +58,14 @@ class mymusic extends Component {
         };
         // this.navigation = props.navigation;
     }
+           // headerTitle: (
+        //      <TextInput 
+        //      style={{textAlign: 'center' ,borderRadius: 30, fontSize:14, backgroundColor: '#ffffff',width: width / 3 * 2 , height:width / 10}}
+        //      placeholder ="搜索音乐、歌词、电台"//
+        //      placeholderTextColor="#E8E8E8"//
+        //      onChangeText={(value) => self.setState({text:value})}
+        //      /> 
+        // ),
 
     render() {
         const { actions, state, navigation } = this.props;

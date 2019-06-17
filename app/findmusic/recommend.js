@@ -47,20 +47,18 @@ class Recommend extends Component {
         Alert.alert("=======>热搜榜")
     }
     onPressSongSheet(id){
-
         const{navigation}=this.props.props;
 
         if(navigation){
-            navigation.navigate('Player',{songid:id}) 
-        }
-      
+            navigation.navigate('Player',{songid:id,id:1}) 
+        }     
     }
     renderItem({item, index})  {
         return (
             <TouchableOpacity activeOpacity={0.5} onPress={()=>{self.onPressSongSheet(item.songid)}}>
                 <View style={styles.item}>
                     <Image source={{uri: item['image']}} style={{width: cellWH,height:cellWH, borderRadius: 2}}/>
-                    <View style={{zIndex:999,width:70,height:24,position:'absolute',right:8,top:10,backgroundColor:'rgba(178,178,178,0.5)',justifyContent: 'center',}}>
+                    <View style={{zIndex:999,width:80,height:24,position:'absolute',right:8,top:10,backgroundColor:'rgba(178,178,178,0.5)',justifyContent: 'center',}}>
                         <Text style={{right:10,top:6,position:'absolute',color:'white',fontSize:12,fontWeight:'bold'}}>🔥{item.share}万</Text>
                     </View>
                     <Icon name="caret-right" style={{right:5,top:cellWH-30,position:'absolute',color:'white'}}/>

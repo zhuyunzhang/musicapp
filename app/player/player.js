@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing, Platform, findNodeHandle, Dimensions,ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet,Button, Image, Slider, Animated, Easing, Platform, findNodeHandle, Dimensions,ScrollView} from 'react-native';
 import Video from 'react-native-video'
 import {VibrancyView, BlurView} from 'react-native-blur'
 import {ActivityIndicator} from '@ant-design/react-native';
@@ -88,37 +88,45 @@ class Player extends Component {
     }
 
     componentDidMount() {
+
       const {actions, state} = this.props;
-      var id=this.props.navigation.state.params.songid;
-      var url =api.getRoot();
-      let urls = url+'/netease/songList?id='+id
-   
-      fetch(urls, {  
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        method: 'GET'
-      })
-      .then(response => response.json())
-      .then(responseJson => {
-        // this.setState({
-        //   musicInfo:responseJson.data
-        // })
-        this.setState({
-          musicInfo:responseJson.data.tracks,
-        }, () => {
-          this.spin()
-          mockData=this.state.musicInfo;
-          showlyics=this.state.showlyic
+      mockData=null;
+      var pid=this.props.navigation.state.params.id;
+      if(pid==1){
+        var id=this.props.navigation.state.params.songid;
+        var url =api.getRoot();
+
+        let urls = url+'/netease/songList?id='+id
+     
+        fetch(urls, {  
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          method: 'GET'
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+          // this.setState({
+          //   musicInfo:responseJson.data
+          // })
           this.setState({
-            loading:false
+            musicInfo:responseJson.data.tracks,
+          }, () => {
+            this.spin()
+            mockData=this.state.musicInfo;
+            showlyics=this.state.showlyic
+            this.setState({
+              loading:false
+            })
           })
         })
-      })
-      .catch(error => {
-        console.log("========>>网络错误")
-      });  
+        .catch(error => {
+          console.log("========>>网络错误")
+        }); 
+      }else if(pid==2) {
+        console.log("=======>>>"+pid)
+      }
     }
     //this.state.musicInfo[this.state.currentIndex].album.picUrl
     formatMediaTime(duration) {
@@ -374,7 +382,13 @@ class Player extends Component {
     this.setState({viewRef: findNodeHandle(this.backgroundImage)})
   }
     render() {
-      const {showLyic } = this.state;
+        const {showLyic } = this.state;
+        const onPressBack = () => {
+          const{navigation}=this.props;
+          if(navigation){
+            navigation.goBack();
+          }
+        }
        return (
             mockData!=null ?
               <View style={styles.container}>
@@ -401,7 +415,13 @@ class Player extends Component {
                   }
                 </View>
                 {this.renderPlayer()}
-              </View>: <View style={styles.othercontainer}><ActivityIndicator text="正在加载" /></View>
+              </View>: <View style={styles.othercontainer}><ActivityIndicator text="正在加载" />             
+              <Button
+                  onPress={onPressBack}
+                  title="<返回"
+                  color="#841584"
+                  />
+              </View>
         );
     }
 }
@@ -430,10 +450,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // backgroundColor: 'rgba(0, 0, 0, 0)',
     width: deviceInfo.deviceWidth,
-    height: deviceInfo.deviceHeight/11,
-    borderBottomWidth:1,
-    borderBottomColor:'white',
-
+    height: deviceInfo.deviceHeight/11, 
   },
   navBarContent: {
     marginTop: 25,

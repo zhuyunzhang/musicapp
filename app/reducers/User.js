@@ -11,10 +11,11 @@ const initialState = {
 	user_info: null,
 	hot_music:null,
 	music_list:null,
+	music_indo:null,
 };
 
 export default function user(state = {}, action = {}) {
-	//SET_MUSIC_LIST
+	//SET_MUSIC_INFO
 	switch(action.type) {
 	case types.SET_USER_INFO:
 		return Object.assign(
@@ -30,6 +31,11 @@ export default function user(state = {}, action = {}) {
 		return Object.assign(
             {}, state,
             {music_list: action.data}
+        );
+    case types.SET_MUSIC_INFO:
+		return Object.assign(
+            {}, state,
+            {music_indo: action.data}
         );
 	default:
 		return state;

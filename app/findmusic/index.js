@@ -47,8 +47,6 @@ class findmusic extends Component {
              onChangeText={(value) => self.setState({text:value})}
              /> 
         ),
-        headerRight:<View style={{marginRight:width/12}}/>,
-        headerLeft:<View style={{marginRight:width/12}}/>,
         headerStyle: {
             backgroundColor: '#CD3700',
             height :height/15
@@ -60,11 +58,20 @@ class findmusic extends Component {
             textAlign: 'center' 
         },
         //onPress={() => this.onPressWallet(item.pay_money)}
-       headerRight:(
-            <TouchableOpacity onPress={() => self.onPressFindMusic()}>
-                <Icon name="search" size={30} style={{color:'#FFFFFF',marginRight:width / 12}}/>
-            </TouchableOpacity>
-        )  
+        headerRight:(
+            <View> 
+                <TouchableOpacity onPress={() => self.onPressFindMusic()}>
+                    <Icon name="search" size={30} style={{color:'#FFFFFF',marginRight:width / 16}}/>
+                </TouchableOpacity>
+            </View>
+        ),
+        // headerLeft:(
+        //     <View>    
+        //         <TouchableOpacity onPress={() => self.onPressFindMusic()}>
+        //             <Icon name="bar-chart" size={30} style={{color:'#FFFFFF',marginLeft:width / 16}}/>
+        //         </TouchableOpacity>
+        //     </View>
+        // )  
     };
 
     static navigationOptions = {
@@ -74,7 +81,10 @@ class findmusic extends Component {
         )
     };
      onPressFindMusic(){
-        Alert.alert(this.state.text)
+        const{navigation}=this.props;
+        if(navigation){
+            navigation.navigate('SearchMusic',{search:this.state.text}) 
+        }
      }
     onChange = (value) => {
         this.setState({ value });
@@ -92,9 +102,9 @@ class findmusic extends Component {
 }
 
 export default connect(state => ({
-	state: state.user
+    state: state.user
 }), (dispatch) => ({
-	actions: bindActionCreators(action.user, dispatch)
+    actions: bindActionCreators(action.user, dispatch)
 }))(findmusic);
 
 const styles = {

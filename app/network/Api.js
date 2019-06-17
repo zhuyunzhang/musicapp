@@ -30,6 +30,11 @@ export function HotSongList( params, callback) {
 export function GetMusicList( params, callback) {
     return getRequest(`/netease/songList`, params, callback);
 }
+
+//搜索歌曲/
+export function SearchMusicInfo( params, callback) {
+    return getRequest(`/netease/search`, params, callback);
+}
 function getRequest(url, params) {
     var curl = getUrl(url, params);
     console.log('get request:' + curl);
@@ -146,3 +151,16 @@ function paramsStr(params){
     }
     return paramstr;
 }
+
+export function getUrls(url,params){
+    let ret = api.API_ROOT + url;
+    let paramstr= paramsStr(params);
+    if(paramstr.length>0){
+        ret = ret + '?' + paramstr;
+    }
+    // console.log(ret);
+    return ret;
+}
+
+
+

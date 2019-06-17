@@ -24,7 +24,13 @@ function setMusicList(type, data) {
         data
     };
 }
-
+//搜索歌曲
+function setMusicInfo(type, data) {
+    return {
+        type,
+        data
+    };
+}
 
 export const UserInfo = (id, params, callback) => {
     return (dispatch, getState) => {
@@ -68,5 +74,29 @@ export const GetMusicList = ( params, callback) => {
         })();
     };
 };
-
-
+//SearchMusicInfo搜索歌曲
+export const SearchMusicInfo = ( params, callback) => {
+    return (dispatch, getState) => {
+        return (async () => {
+            try {
+                dispatch(setMusicInfo(types.SET_MUSIC_INFO, null));
+                var data = await api.SearchMusicInfo(params, callback);
+                dispatch(setMusicInfo(types.SET_MUSIC_INFO, data));
+            } catch (e) {
+                console.log('err ==== ' + JSON.stringify(e));
+            }
+        })();
+    };
+};
+export function SearchMusicInfos(params, callback) {
+    // console.log('set token: ' + token);
+    var data=null;
+    async () => {
+        try {
+             data = await api.SearchMusicInfo(params, callback);
+        } catch (e) {
+            console.log('err ==== ' + JSON.stringify(e));
+        }
+    }
+    return data;
+}
