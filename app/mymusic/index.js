@@ -16,6 +16,14 @@ const {height, width} =  Dimensions.get('window');
 const myImg = src => <img src={`https://gw.alipayobjects.com/zos/rmsportal/${src}.svg`} className="am-icon am-icon-xs" alt="" />;
 const self = this;
 class mymusic extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: true,
+            selected: '',
+        };
+        
+    }
     componentDidMount() {
         setTimeout(() => {
             SplashScreen.hide();
@@ -42,37 +50,25 @@ class mymusic extends Component {
         tabBarIcon: ({ focused, tintColor }) => (
             <Icon name="reddit" size={25} color={tintColor} />
         )
-
-
     };
-    
-    onChange = (value) => {
-        this.setState({ value });
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible: true,
-            selected: '',
-        };
-        // this.navigation = props.navigation;
-    }
-           // headerTitle: (
-        //      <TextInput 
-        //      style={{textAlign: 'center' ,borderRadius: 30, fontSize:14, backgroundColor: '#ffffff',width: width / 3 * 2 , height:width / 10}}
-        //      placeholder ="搜索音乐、歌词、电台"//
-        //      placeholderTextColor="#E8E8E8"//
-        //      onChangeText={(value) => self.setState({text:value})}
-        //      /> 
-        // ),
+    onPressUserSurvey(){
+      const{navigation}=this.props;
+      if(navigation){
+         navigation.navigate('UserSurvey') 
+      }
+    } 
 
     render() {
-        const { actions, state, navigation } = this.props;
+       
+        const onPressUserSurvey = () => {
+            const {navigation } = this.props;
+            if(navigation){
+                navigation.navigate('UserSurvey') 
+            }
+        }
         return (
             <View style={styles.container}>
-
-                <Button type="primary">这是测试按钮</Button>
+                <Button type="primary" onPress={onPressUserSurvey}>这是测试按钮</Button>
             </View>
         );
     }
