@@ -57,14 +57,18 @@ class findmusic extends Component {
             flex:1,
             textAlign: 'center' 
         },
+        headerRight:<View style={{marginRight:width/12}}/>,
+        headerLeft:<View style={{marginRight:width/12}}/>,
+
         //onPress={() => this.onPressWallet(item.pay_money)}
-        headerRight:(
+         headerRight:(
             <View> 
                 <TouchableOpacity onPress={() => self.onPressFindMusic()}>
                     <Icon name="search" size={30} style={{color:'#FFFFFF',marginRight:width / 16}}/>
                 </TouchableOpacity>
             </View>
         ),
+
         // headerLeft:(
         //     <View>    
         //         <TouchableOpacity onPress={() => self.onPressFindMusic()}>

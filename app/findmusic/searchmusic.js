@@ -99,9 +99,9 @@ class SearchMusic extends Component {
     // };
     playSong = id => {
         console.log("playSong========>>"+id);
-        // const { dispatch, navigation } = this.props;
-        // dispatch(setPlayId(id));
-        // navigation.navigate('Player', {title: '播放器'})
+        const { dispatch, navigation } = this.props;
+
+        navigation.navigate('Player', {id:2})
     };
     scrollToLocation = (params) => {
         console.log("scrollToLocation======>>>"+params)
@@ -179,6 +179,8 @@ class SearchMusic extends Component {
     //{mockData.songs[0].no}
     render() {
         var search=this.props.navigation.state.params.search;
+        console.log("======>>>")
+        console.log(mockData)
         return (
             mockData!=null ?<View style={{flex: 1}}>
                     <View style={{backgroundColor: '#777777', height: 60, width: width}}>

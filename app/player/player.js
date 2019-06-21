@@ -126,6 +126,7 @@ class Player extends Component {
         }); 
       }else if(pid==2) {
         console.log("=======>>>"+pid)
+        
       }
     }
     //this.state.musicInfo[this.state.currentIndex].album.picUrl
