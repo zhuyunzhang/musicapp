@@ -18,7 +18,7 @@ const deviceInfo = {
 let self;
 var mockData=null;
 var showlyics=false;
-class Player extends Component {
+class PlayerList extends Component {
     constructor(props) {
         super(props)
         self=this;
@@ -88,41 +88,7 @@ class Player extends Component {
     }
 
     componentDidMount() {
-
-      const {actions, state} = this.props;
-      mockData=null;
-      var pid=this.props.navigation.state.params.id;
-      var id=this.props.navigation.state.params.songid;
-      var url =api.getRoot();
-
-      let urls = url+'/netease/songList?id='+id
-   
-      fetch(urls, {  
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        method: 'GET'
-      })
-      .then(response => response.json())
-      .then(responseJson => {
-        // this.setState({
-        //   musicInfo:responseJson.data
-        // })
-        this.setState({
-          musicInfo:responseJson.data.tracks,
-        }, () => {
-          this.spin()
-          mockData=this.state.musicInfo;
-          showlyics=this.state.showlyic
-          this.setState({
-            loading:false
-          })
-        })
-      })
-      .catch(error => {
-        console.log("========>>网络错误")
-      }); 
+      this.spin();
     }
     //this.state.musicInfo[this.state.currentIndex].album.picUrl
     formatMediaTime(duration) {
@@ -262,8 +228,8 @@ class Player extends Component {
                       <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
                     </TouchableOpacity>
                     <View style={{alignItems: 'center'}}>
-                      <Text style={styles.title}>{mockData[this.state.currentIndex].artists[0].name}</Text>
-                      <Text style={styles.subTitle}>{mockData[this.state.currentIndex].name}</Text>
+                      <Text style={styles.title}>{mockData[this.state.currentIndex].name}</Text>
+                      <Text style={styles.subTitle}>{mockData[this.state.currentIndex].al.name}</Text>
                     </View>
                     <TouchableOpacity
                       style={{marginTop: 5}}
@@ -295,7 +261,7 @@ class Player extends Component {
                         outputRange: ['0deg', '360deg']
                       })}]
                     }}
-                    source={{uri: mockData[this.state.currentIndex].album.picUrl}}/></View>
+                    source={{uri: mockData[this.state.currentIndex].al.picUrl}}/></View>
                     ):(
                       <View style={styles.cdContainer}>
                         <Text style={{color:'white'}}>歌词未实现</Text>
@@ -385,13 +351,14 @@ class Player extends Component {
             navigation.goBack();
           }
         }
+       mockData=this.props.navigation.state.params.list;
        return (
             mockData!=null ?
               <View style={styles.container}>
                 <Image
                   ref={(img) => { this.backgroundImage = img}}
                   style={styles.bgContainer}
-                  source={{uri: mockData[this.state.currentIndex].album.picUrl}}
+                  source={{uri: mockData[this.state.currentIndex].al.picUrl}}
                   resizeMode='cover'
                   onLoadEnd={() => this.imageLoaded()}
                 />
@@ -426,7 +393,7 @@ export default connect(state => ({
   state: state.user
 }), (dispatch) => ({
   actions: bindActionCreators(action.user, dispatch)
-}))(Player);
+}))(PlayerList);
 
 const styles = StyleSheet.create({
   container: {

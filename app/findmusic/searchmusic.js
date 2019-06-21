@@ -97,12 +97,17 @@ class SearchMusic extends Component {
     //     console.log(backAction);
     //     this.props.navigation.dispatch(backAction);
     // };
-    playSong = id => {
-        console.log("playSong========>>"+id);
-        const { dispatch, navigation } = this.props;
-
-        navigation.navigate('Player', {id:2})
+    playSong(item){
+        const { navigation } = this.props;
+       // console.log(item)
+        var list=new Array();
+        list[0]=item;
+        navigation.navigate('PlayList',{list:list})
     };
+    playSongList(list){
+        const { navigation } = this.props;
+        navigation.navigate('PlayList',{list:list.songs})
+    }
     scrollToLocation = (params) => {
         console.log("scrollToLocation======>>>"+params)
     };
@@ -145,7 +150,7 @@ class SearchMusic extends Component {
                 </View>
                 <View style={{flex: 1, flexDirection: 'row',alignItems: 'center', height: '100%', marginLeft: 10, paddingRight: 10, borderBottomWidth: 1, borderColor: '#F0F0F0'}} >
                     <View style={{flex: 1}}>
-                        <TouchableOpacity onPress={() => this.playSong(1)}>
+                        <TouchableOpacity onPress={() => this.playSong(item)}>
                             <Normal numberOfLines={1} style={{fontSize: 14}} color={'black'}>{item.title}</Normal>
                             <Tip title={item.subTitle}  color={'black'} numberOfLines={1} />
                         </TouchableOpacity>
@@ -160,7 +165,7 @@ class SearchMusic extends Component {
     sectionHeader = () => (
         <View style={{height: 50, width: width, flexDirection: 'row', paddingLeft: 10, alignItems: 'center', backgroundColor: '#ffffff'}}>
             <View style={{width: 25, alignItems: 'center', justifyContent: 'center'}}>
-            <TouchableOpacity ><Icon name={'oneIcon|music_playing_s'} size={20} /></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.playSongList(mockData)}><Icon name={'oneIcon|music_playing_s'} size={20} /></TouchableOpacity>
             </View>
             <View style={{flex: 1, flexDirection: 'row',alignItems: 'center', height: '100%', marginLeft: 10, paddingRight: 10, borderBottomWidth: 1, borderColor: '#F0F0F0'}} >
                 <Text>播放全部</Text>
@@ -179,8 +184,7 @@ class SearchMusic extends Component {
     //{mockData.songs[0].no}
     render() {
         var search=this.props.navigation.state.params.search;
-        console.log("======>>>")
-        console.log(mockData)
+        //console.log(mockData)
         return (
             mockData!=null ?<View style={{flex: 1}}>
                     <View style={{backgroundColor: '#777777', height: 60, width: width}}>

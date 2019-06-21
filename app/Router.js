@@ -6,6 +6,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 // 引入页面组件
 import ScreenBottomTab from './Views';
 import Player from './player/player';
+import PlayList from './player/playlist';
 import SearchMusic from './findmusic/searchmusic';
 import UserSurvey from './mymusic/UserSurvey';
 
@@ -49,6 +50,7 @@ const AppNavigator = StackModalNavigator({
   Player:{screen: Player }, 
   SearchMusic:{screen: SearchMusic },
   UserSurvey:{screen: UserSurvey },
+  PlayList:{screen:PlayList},
 });
 const App = createAppContainer(AppNavigator)
 export default App
